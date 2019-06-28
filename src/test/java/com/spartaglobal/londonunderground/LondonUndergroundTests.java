@@ -21,10 +21,10 @@ public class LondonUndergroundTests {
         JSONObject tube = new JSONObject();
         JSONArray tubes = new JSONArray();
 
-        tubes.add("central");
-        tubes.add("district");
+        tubes.add("serviceTypes[5].name");
+        //tubes.add("district");
 
-        tube.put("id", tubes);
+        tube.put("serviceTypes", tubes);
 
         System.out.println(tube.toJSONString());
 
@@ -38,9 +38,21 @@ public class LondonUndergroundTests {
                 .jsonPath();
     }
 
+//    public JsonPath testGetArrayServiceName(){
+//        return jsonBody.("serviceTypes[5].name");
+//    }
+
     @Test
     public void getCentralLineTest(){
         Assert.assertEquals("central", jsonBody.get("id[1]"));
+
+    }
+
+    @Test
+    public void testGetJubileeHasNight(){
+        //Assert.assertEquals(true ,jsonBody.body("serviceTypes[5]name"));
+        JSONArray arrayJubilee = (JSONArray) jsonBody.getJsonObject("name");
+        System.out.println(arrayJubilee.toJSONString());
 
     }
 }
